@@ -41,6 +41,28 @@ rubocop -a
 
 ## Troubleshooting
 
+if you get the error: `Shell command exited with exit status 102 instead of 0.`
+
+Make sure that your password is set correctly with something like:
+
+```ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "your-application-specific-password"```
+
+if you get the error: `Shell command exited with exit status 16 instead of 0.`
+
+You need to set the asc_provider in the notarize command (this happens when you have multiple teams)
+```
+    notarize(
+	    package: "YOUR_PATH",
+	    bundle_id: "YOUR_BUNDLE",
+	    asc_provider: "PROVIDER_SHORT_NAME"
+	)
+ ```
+    
+ to get your provider short name, run
+ 
+``` "/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/itms/bin/iTMSTransporter" -m provider -u 'YOUR_USERNAME' -p 'YOUR_ONETIME_PASSWORD' -account_type itunes_connect -v off```
+    
+
 If you have trouble using fastlane plugins, check out fastlane's [Plugins Troubleshooting](https://docs.fastlane.tools/plugins/plugins-troubleshooting/) guide.
 
 ## About fastlane
